@@ -176,3 +176,18 @@ fi
 
 log "Setup (user phase) completed successfully"
 
+log "Set Up E-commerce"
+# If you're using version 15 or migrating to version 15, you need to install the frappe's Webshop app first in order to use the E-commerce features
+# https://docs.frappe.io/erpnext/user/manual/en/set_up_e_commerce
+
+# A required dependency for webshop app: https://github.com/frappe/payments
+bench get-app payments --branch version-15
+bench --site ecstore.localhost install-app payments
+
+# Get the ERPNext app
+bench get-app https://github.com/frappe/erpnext  --branch version-15
+bench --site ecstore.localhost install-app erpnext
+
+# Install webshop app
+bench get-app webshop --branch version-15
+bench --site ecstore.localhost install-app webshop
