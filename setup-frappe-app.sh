@@ -137,20 +137,20 @@ nvm install 18
 nvm use 18
 npm install -g yarn
 
-#############################################
-# PYTHON / PIP
-#############################################
-log "Ensuring Python and pip are usable for Bench"
-# Use system Python3 and user-level pip
-python3 -m pip install --user --upgrade pip setuptools wheel
+# #############################################
+# # PYTHON / PIP
+# #############################################
+# log "Ensuring Python and pip are usable for Bench"
+# # Use system Python3 and user-level pip
+# python3 -m pip install --user --upgrade pip setuptools wheel
 
 #############################################
 # BENCH
 #############################################
 log "Installing Bench CLI (user-local)"
-python3 -m pip install --user frappe-bench
-# Ensure user-local bin is on PATH for this session
-export PATH=\"$HOME/.local/bin:$PATH\"
+sudo pip install frappe-bench==5.28 --break-system-packages
+# # Ensure user-local bin is on PATH for this session
+# export PATH=\"$HOME/.local/bin:$PATH\"
 
 log "Initializing Bench"
 bench init frappe-bench --frappe-branch version-15
@@ -159,8 +159,8 @@ bench init frappe-bench --frappe-branch version-15
 # SITE CREATION
 #############################################
 cd ~/frappe-bench
-log "Installing honcho in bench virtualenv"
-( source env/bin/activate && pip install honcho )
+# log "Installing honcho in bench virtualenv"
+# ( source env/bin/activate && pip install honcho )
 log "Creating site: $SITE_NAME"
 bench new-site "$SITE_NAME" \
   --db-root-username=root \
